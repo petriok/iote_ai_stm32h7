@@ -1,0 +1,8 @@
+# STM32H753II IOTE.ai H7 board configuration
+
+# Copyright (c) 2020 IOTE.ai
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_IOTE_AI_STM32H7
+	bool "IOTE.ai STM32H753II Development Board"
+	depends on SOC_STM32H753XX

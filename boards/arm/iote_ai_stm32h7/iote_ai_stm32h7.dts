@@ -1,0 +1,64 @@
+/*
+ * Copyright (c) 2020 IOTE.ai
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+ /dts-v1/;
+ #include <st/h7/stm32h753.dtsi>
+ #include <st/h7/stm32h753iitx-pinctrl.dtsi>
+ 
+ / {
+	 model = "IOTE.ai STM32H7 development board";
+	 compatible = "st,iote_ai_stm32h7";
+ 
+	 chosen {
+		 zephyr,console = &usart2;
+		 zephyr,shell-uart = &usart2;
+		 zephyr,sram = &sram0;
+		 zephyr,flash = &flash0;
+		 zephyr,dtcm = &dtcm;
+ //		zephyr,can-primary = 
+	 };
+ 
+	 leds {
+		 compatible = "gpio-leds";
+		 green_led: led_0 {
+			 gpios = <&gpioe 12 GPIO_ACTIVE_HIGH>;
+			 label = "User LD1";
+		 };
+		 blue_led: led_1 {
+			 gpios = <&gpiog 0 GPIO_ACTIVE_HIGH>;
+			 label = "User LD2";
+		 };
+	 };
+ 
+	 aliases {
+		 led0 = &green_led;
+		 led1 = &blue_led;
+	 };
+ };
+ 
+ &usart2 {
+	 pinctrl-0 = <&usart2_tx_pa2 &usart2_rx_pa3>;
+	 current-speed = <115200>;
+	 status = "okay";
+ };
+ 
+ &uart4 {
+	 pinctrl-0 = <&uart4_tx_pd1 &uart4_rx_pd0>;
+	 current-speed = <115200>;
+	 status = "okay";
+ };
+ 
+ &i2c4 {
+	 pinctrl-0 = <&i2c4_scl_ph11 &i2c4_sda_ph12>;
+	 status = "okay";
+	 clock-frequency = <I2C_BITRATE_FAST>;
+ };
+ 
+ &rng {
+	 status = "okay";
+ };
+ 
+ 
